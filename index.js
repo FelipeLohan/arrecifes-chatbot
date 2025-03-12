@@ -49,7 +49,7 @@ function start(client) {
     // === Passo 2 - Menu principal ===
     if (user.step === 2) {
 
-      if (msg.includes('desafios semanais')) {
+      if (msg.includes('desafios semanais' || '1' || '1.' || '1-')) {
         await client.sendText(userId,
           'Quer ver os Desafios Mensais que estão dando o dobro de capibas?\n\n' +
           '🗓 *Tarefas Mensais* \n💰 Capibas em dobro 💰\n\n' +
@@ -63,12 +63,12 @@ function start(client) {
         await voltarAoMenuPrincipal(client, userId, user);
       }
 
-      else if (msg.includes('validar')) {
+      else if (msg.includes('validar' || '2' || '2.' || '2-')) {
         await client.sendText(userId, 'Que bom que você cumpriu um desafio!\n\nEscolha uma das categorias abaixo:\n\n🦁 *Animais*\n📝 *Cidadania*\n🚲 *Mobilidade*\n💚 *Saúde e bem estar*\n🌳 *Meio ambiente*');
         user.step = 3;
       }
 
-      else if (msg.includes('saldo')) {
+      else if (msg.includes('saldo' || '3' || '3.' || '3-' || 'capibas')) {
         await client.sendText(userId, 'Seu saldo de Capibas é *150 moedas*! 🪙');
         await voltarAoMenuPrincipal(client, userId, user);
       }
@@ -96,7 +96,7 @@ function start(client) {
       if (message.mimetype && message.mimetype.startsWith('image')) {
         await client.sendText(userId, 'Estamos validando essa informação...\n\n✅ Parabéns! Sua informação foi validada!\n\nVocê ganhou mais *10 moedas capibas* 🪙!');
       } else {
-        await client.sendText(userId, 'Estamos validando essa informação...\n\n✅ Parabéns! Sua informação foi validada!\n\nVocê ganhou mais *10 moedas capibas* 🪙!');
+        await client.sendText(userId, 'Você não mandou um Documento valido! ⛔, tente novamente!');
       }
 
       await client.sendText(userId, '🌐 Veja aqui o seu Conecta Recife!\n👉 https://conecta.recife.pe.gov.br');
