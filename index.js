@@ -49,7 +49,7 @@ function start(client) {
     // === Passo 2 - Menu principal ===
     if (user.step === 2) {
 
-      if (msg.includes('desafios semanais' || '1' || '1.' || '1-')) {
+      if (msg.includes('desafios semanais') || msg.includes('1') || msg.includes('1.') || msg.includes('1-')) {
         await client.sendText(userId,
           'Quer ver os Desafios Mensais que estão dando o dobro de capibas?\n\n' +
           '🗓 *Tarefas Mensais* \n💰 Capibas em dobro 💰\n\n' +
@@ -63,12 +63,12 @@ function start(client) {
         await voltarAoMenuPrincipal(client, userId, user);
       }
 
-      else if (msg.includes('validar' || '2' || '2.' || '2-')) {
+      else if (msg.includes('validar') || msg.includes('2') || msg.includes('2.') || msg.includes('2-')) {
         await client.sendText(userId, 'Que bom que você cumpriu um desafio!\n\nEscolha uma das categorias abaixo:\n\n🦁 *Animais*\n📝 *Cidadania*\n🚲 *Mobilidade*\n💚 *Saúde e bem estar*\n🌳 *Meio ambiente*');
         user.step = 3;
       }
 
-      else if (msg.includes('saldo' || '3' || '3.' || '3-' || 'capibas')) {
+      else if (msg.includes('saldo') || msg.includes('3') || msg.includes('3.') || msg.includes('3-')) {
         await client.sendText(userId, 'Seu saldo de Capibas é *150 moedas*! 🪙');
         await voltarAoMenuPrincipal(client, userId, user);
       }
