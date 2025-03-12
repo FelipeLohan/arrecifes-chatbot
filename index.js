@@ -48,6 +48,8 @@ function start(client) {
 
     // === Passo 2 - Menu principal ===
     if (user.step === 2) {
+      
+      await new Promise(resolve => setTimeout(resolve, 2000));
 
       if (msg.includes('desafios semanais') || msg.includes('1') || msg.includes('1.') || msg.includes('1-')) {
         await client.sendText(userId,
@@ -66,7 +68,7 @@ function start(client) {
       }
 
       else if (msg.includes('validar') || msg.includes('2') || msg.includes('2.') || msg.includes('2-')) {
-        await client.sendText(userId, 'Que bom que você cumpriu um desafio!\n\nEscolha uma das categorias que mais se enquadra abaixo:\n\n1️⃣🦁 *Animais*\n2️⃣📝 *Cidadania*\n3️⃣🚲 *Mobilidade*\n4️⃣💚 *Saúde e bem estar*\n5️⃣🌳 *Meio ambiente*');
+        await client.sendText(userId, 'Que bom que você cumpriu um desafio!\n\nEscolha uma das categorias que mais se enquadra abaixo:\n\n1️⃣ 🦁 *Animais*\n2️⃣ 📝 *Cidadania*\n3️⃣ 🚲 *Mobilidade*\n4️⃣ 💚 *Saúde e bem estar*\n5️⃣ 🌳 *Meio ambiente*');
         user.step = 3;
       }
 
@@ -103,7 +105,9 @@ function start(client) {
         await client.sendText(userId, 'Estamos validando essa informação...\n\n✅ Parabéns! Sua informação foi validada!\n\nVocê ganhou mais *10 moedas capibas* 🪙!');
       } else {
         await client.sendText(userId, 'Você não mandou um Documento valido! ⛔, tente novamente!');
+        user.step = 3;
       }
+      await new Promise(resolve => setTimeout(resolve, 2500));
 
       await client.sendText(userId, '🌐 Veja aqui o seu Conecta Recife!\n👉 https://conecta.recife.pe.gov.br');
 
