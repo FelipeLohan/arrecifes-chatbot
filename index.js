@@ -73,7 +73,7 @@ function start(client) {
       }
 
       else if (msg.includes('saldo') || msg.includes('3') || msg.includes('3.') || msg.includes('3-')) {
-        await client.sendText(userId, 'Seu saldo de Capibas é *150 moedas*! 🪙');
+        await client.sendText(userId, '🌐 Veja seu saldo aqui no seu Conecta Recife!\n👉 https://conecta.recife.pe.gov.br');
         await voltarAoMenuPrincipal(client, userId, user);
       }
 
@@ -103,16 +103,16 @@ function start(client) {
 
       if (message.mimetype && message.mimetype.startsWith('image')) {
         await client.sendText(userId, 'Estamos validando essa informação...\n\n✅ Parabéns! Sua informação foi validada!\n\nVocê ganhou mais *10 moedas capibas* 🪙!');
+
+        await new Promise(resolve => setTimeout(resolve, 2500));
+
+        await client.sendText(userId, '🌐 Veja aqui o seu Conecta Recife!\n👉 https://conecta.recife.pe.gov.br');
       } else {
         await client.sendText(userId, 'Você não mandou um Documento valido! ⛔, tente novamente!');
         user.step = 3;
       }
       await new Promise(resolve => setTimeout(resolve, 2500));
-
-      await client.sendText(userId, '🌐 Veja aqui o seu Conecta Recife!\n👉 https://conecta.recife.pe.gov.br');
-
-      await new Promise(resolve => setTimeout(resolve, 3000));
-
+      
       await voltarAoMenuPrincipal(client, userId, user);
 
       return;
