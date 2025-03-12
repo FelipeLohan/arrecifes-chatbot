@@ -38,7 +38,7 @@ function start(client) {
     // === Passo 1 - Confirmação do CPF ===
     if (user.step === 1) {
       if (msg === 'sim' || msg === 'confirmar') {
-        await client.sendText(userId, 'Bem-vindo(a)! Esse é o nosso sistema de atendimento do Conecta Recife.\n\nConfira as opções abaixo e escolha a que melhor atende à sua necessidade:\n\n✅ *Desafios Semanais*\n✅ *Validar meu desafio*\n✅ *Saldo de Capibas*');
+        await client.sendText(userId, 'Bem-vindo(a)! Esse é o nosso sistema de atendimento do Conecta Recife.\n\nConfira as opções abaixo e escolha a que melhor atende à sua necessidade:\n\n1️⃣ *Desafios Semanais*\n2️⃣ *Validar meu desafio*\n3️⃣ *Saldo de Capibas*');
         user.step = 2;
       } else {
         await client.sendText(userId, 'Por favor, confirme seu CPF respondendo *Sim* para continuar!');
@@ -64,7 +64,7 @@ function start(client) {
       }
 
       else if (msg.includes('validar') || msg.includes('2') || msg.includes('2.') || msg.includes('2-')) {
-        await client.sendText(userId, 'Que bom que você cumpriu um desafio!\n\nEscolha uma das categorias abaixo:\n\n🦁 *Animais*\n📝 *Cidadania*\n🚲 *Mobilidade*\n💚 *Saúde e bem estar*\n🌳 *Meio ambiente*');
+        await client.sendText(userId, 'Que bom que você cumpriu um desafio!\n\nEscolha uma das categorias que mais se enquadra abaixo:\n\n🦁 *Animais*\n📝 *Cidadania*\n🚲 *Mobilidade*\n💚 *Saúde e bem estar*\n🌳 *Meio ambiente*');
         user.step = 3;
       }
 
@@ -74,7 +74,7 @@ function start(client) {
       }
 
       else {
-        await client.sendText(userId, 'Não entendi! Escolha uma das opções:\n\n✅ *Desafios Semanais*\n✅ *Validar meu desafio*\n✅ *Saldo de Capibas*');
+        await client.sendText(userId, 'Não entendi! Escolha uma das opções:\n\n1️⃣ *Desafios Semanais*\n2️⃣ *Validar meu desafio*\n3️⃣ *Saldo de Capibas*');
       }
 
       return;
