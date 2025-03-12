@@ -8,7 +8,7 @@ venom.create({
   headless: false,
   browserArgs: ['--disable-gpu'],
   useChrome: true,
-  executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe' // Altere se necessário!
+  executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 })
 .then((client) => start(client))
 .catch((erro) => console.log(erro));
@@ -28,14 +28,14 @@ function start(client) {
 
     const user = userStates[userId];
 
-    // === Passo 0 - Boas vindas e pedido do CPF ===
+    
     if (user.step === 0) {
       await client.sendText(userId, 'Olá!\n\nAntes de prosseguirmos com as opções, devo confirmar sua identidade!\n\nSeu CPF é xxx.xxx.xxx-xx?');
       user.step = 1;
       return;
     }
 
-    // === Passo 1 - Confirmação do CPF ===
+   
     if (user.step === 1) {
       if (msg === 'sim' || msg === 'confirmar') {
         await client.sendText(userId, 'Bem-vindo(a)! Esse é o nosso sistema de atendimento do Conecta Recife.\n\nConfira as opções abaixo e escolha a que melhor atende à sua necessidade:\n\n1️⃣ *Desafios Semanais*\n2️⃣ *Validar meu desafio*\n3️⃣ *Saldo de Capibas*');
@@ -46,7 +46,7 @@ function start(client) {
       return;
     }
 
-    // === Passo 2 - Menu principal ===
+    
     if (user.step === 2) {
       
       await new Promise(resolve => setTimeout(resolve, 2000));
@@ -84,7 +84,7 @@ function start(client) {
       return;
     }
 
-    // === Passo 3 - Categoria escolhida ===
+    
     if (user.step === 3) {
       await client.sendText(userId,
         `Por favor, informe qual foi a atividade realizada e o desafio cumprido para que possamos validar.\n\n` +
@@ -95,7 +95,7 @@ function start(client) {
       return;
     }
 
-    // === Passo 4 - Espera mensagem ou imagem ===
+    
     if (user.step === 4) {
 
       await client.sendText(userId, 'Estamos validando essa informação... 👨‍💻');
@@ -112,7 +112,7 @@ function start(client) {
         user.step = 3;
       }
       await new Promise(resolve => setTimeout(resolve, 2500));
-      
+
       await voltarAoMenuPrincipal(client, userId, user);
 
       return;
