@@ -59,6 +59,8 @@ function start(client) {
           '✅ Adotar um Pet usando Adota Pet do Conecta Recife\n👉 Novo amigo de quatro patas esperando! 🐶🐱\n\n' +
           '✅ Levar seu pet para castração ou atualização da carteira vacinal\n👉 Cuidar da saúde do bichinho também é amor! 🐾'
         );
+        
+        await new Promise(resolve => setTimeout(resolve, 5000));
 
         await voltarAoMenuPrincipal(client, userId, user);
       }
@@ -86,12 +88,16 @@ function start(client) {
         `Por favor, informe qual foi a atividade realizada e o desafio cumprido para que possamos validar.\n\n` +
         `Caso haja algum documento comprobatório, anexe-o para concluir a verificação.`
       );
+
       user.step = 4;
       return;
     }
 
     // === Passo 4 - Espera mensagem ou imagem ===
     if (user.step === 4) {
+
+      await client.sendText(userId, 'Estamos validando essa informação... 👨‍💻');
+      await new Promise(resolve => setTimeout(resolve, 6000));
 
       if (message.mimetype && message.mimetype.startsWith('image')) {
         await client.sendText(userId, 'Estamos validando essa informação...\n\n✅ Parabéns! Sua informação foi validada!\n\nVocê ganhou mais *10 moedas capibas* 🪙!');
@@ -100,6 +106,8 @@ function start(client) {
       }
 
       await client.sendText(userId, '🌐 Veja aqui o seu Conecta Recife!\n👉 https://conecta.recife.pe.gov.br');
+
+      await new Promise(resolve => setTimeout(resolve, 3000));
 
       await voltarAoMenuPrincipal(client, userId, user);
 

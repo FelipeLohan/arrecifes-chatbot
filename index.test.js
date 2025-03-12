@@ -21,6 +21,8 @@ function start(client) {
     const userId = message.from;
     const msg = message.body.toLowerCase();
 
+    
+
     // Se não tem estado, cria um
     if (!userStates[userId]) {
       userStates[userId] = { step: 0 };
@@ -59,7 +61,6 @@ function start(client) {
           '✅ Adotar um Pet usando Adota Pet do Conecta Recife\n👉 Novo amigo de quatro patas esperando! 🐶🐱\n\n' +
           '✅ Levar seu pet para castração ou atualização da carteira vacinal\n👉 Cuidar da saúde do bichinho também é amor! 🐾'
         );
-
         await voltarAoMenuPrincipal(client, userId, user);
       }
 
