@@ -169,4 +169,4 @@ Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## 🙋‍♂️ Autores
 
-Feito com ❤️ por **Felipe Lohan** e **Vinicius Gomes**
+Feito com ❤️ por **Felipe Lohan (Desenvolvedor)** , **Vinicius Gomes (Desenvolvedor e CyberSecurity)** e **Heitor Sette (Gestor do projeto)**
