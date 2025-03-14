@@ -54,15 +54,19 @@ function start(client) {
           '✅ Adotar um Pet usando Adota Pet do Conecta Recife\n👉 Novo amigo de quatro patas esperando! 🐶🐱\n\n' +
           '✅ Levar seu pet para castração ou atualização da carteira vacinal\n👉 Cuidar da saúde do bichinho também é amor! 🐾'
         );
+        await new Promise(resolve => setTimeout(resolve, 3000));
         await voltarAoMenuPrincipal(client, userId, user);
+
       } else if (msg.includes('validar') || msg.includes('2')) {
         await client.sendText(userId, 'Que bom que você cumpriu um desafio!\n\nEscolha uma das categorias que mais se enquadra abaixo:\n\n1️⃣ 🦁 *Animais*\n2️⃣ 📝 *Cidadania*\n3️⃣ 🚲 *Mobilidade*\n4️⃣ 💚 *Saúde e bem estar*\n5️⃣ 🌳 *Meio ambiente*');
         user.step = 3;
       } else if (msg.includes('saldo') || msg.includes('3')) {
         await client.sendText(userId, '🌐 Veja seu saldo aqui no seu Conecta Recife!\n👉 https://conecta.recife.pe.gov.br');
+        await new Promise(resolve => setTimeout(resolve, 2500));
         await voltarAoMenuPrincipal(client, userId, user);
       } else if (msg.includes('moeda capiba') || msg.includes('4')) {
-        await client.sendText(userId, 'A moeda *Capiba* é um incentivo digital oferecido pelo Conecta Recife. Você pode acumular Capibas ao participar de desafios e atividades da comunidade e trocá-los por benefícios!');
+        await client.sendText(userId, 'A moeda *Capiba* é um incentivo digital oferecido pelo Conecta Recife. Você pode acumular Capibas ao participar de desafios e atividades da comunidade e trocá-los por benefícios! \n🌐Saiba mais no nosso site oficial: https://conecta.recife.pe.gov.br/servico/949');
+        await new Promise(resolve => setTimeout(resolve, 2500));
         await voltarAoMenuPrincipal(client, userId, user);
       } else {
         await client.sendText(userId, 'Não entendi! Escolha uma das opções:\n\n1️⃣ *Desafios Mensais*\n2️⃣ *Validar meu desafio*\n3️⃣ *Saldo de Capibas*\n4️⃣ *O que é a moeda Capiba?*');
@@ -72,8 +76,7 @@ function start(client) {
 
     if (user.step === 3) {
       await client.sendText(userId,
-        `Por favor, informe qual foi a atividade realizada e o desafio cumprido para que possamos validar.\n\n` +
-        `Caso haja algum documento comprobatório, anexe-o para concluir a verificação.`
+        `✅ Para validarmos sua atividade, envie o Documento de Validação em formato de foto 📸 ou PDF 📄.`
       );
       user.step = 4;
       return;
