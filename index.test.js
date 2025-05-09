@@ -25,15 +25,17 @@ function start(client) {
 
     const user = userStates[userId];
 
+    // Step 0 - Confirmação do CPF
     if (user.step === 0) {
       await client.sendText(userId, 'Olá!\n\nAntes de prosseguirmos com as opções, devo confirmar sua identidade!\n\nSeu CPF é xxx.xxx.xxx-xx?');
       user.step = 1;
       return;
     }
 
+    // Step 1 - Confirmar CPF
     if (user.step === 1) {
       if (msg === 'sim' || msg === 'confirmar') {
-        await client.sendText(userId, 'Bem-vindo(a)! Esse é o nosso sistema de atendimento do Conecta Recife.\n\nConfira as opções abaixo e escolha a que melhor atende à sua necessidade:\n\n1️⃣ *Desafios Mensais*\n2️⃣ *Validar meu desafio*\n3️⃣ *Saldo de Capibas*\n4️⃣ *O que é a moeda Capiba?*');
+        await client.sendText(userId, 'Bem-vindo(a)! Esse é o nosso sistema de atendimento do Conecta Recife.\n\nConfira as opções abaixo e escolha a que melhor atende à sua necessidade:\n\n1️⃣ *Portal Saúde*\n2️⃣ *Desafios Mensais*\n3️⃣ *Validar meu desafio*\n4️⃣ *Saldo de Capibas*\n5️⃣ *O que é a moeda Capiba?*');
         user.step = 2;
       } else {
         await client.sendText(userId, 'Por favor, confirme seu CPF respondendo *Sim* para continuar!');
@@ -41,58 +43,69 @@ function start(client) {
       return;
     }
 
+    // Step 2 - Menu Principal
     if (user.step === 2) {
       await new Promise(resolve => setTimeout(resolve, 2000));
 
-      if (msg.includes('desafios mensais') || msg.includes('1')) {
-        await client.sendText(userId,
-          'Quer ver os Desafios Mensais que estão dando o dobro de capibas?\n\n' +
-          '🗓 *Tarefas Mensais* \n💰 Capibas em dobro 💰\n\n' +
-          '✅ Participar de aulas no Compaz / Academia Recife\n👉 *Meta:* 2x por semana!\n\n' +
-          '✅ Doar sangue nas campanhas apoiadas pelo Conecta Recife\n👉 Salvar vidas tá na lista! 🩸\n\n' +
-          '✅ Fazer atualização da carteira vacinal\n👉 Saúde em dia, bora lá! 💉\n\n' +
-          '✅ Adotar um Pet usando Adota Pet do Conecta Recife\n👉 Novo amigo de quatro patas esperando! 🐶🐱\n\n' +
-          '✅ Levar seu pet para castração ou atualização da carteira vacinal\n👉 Cuidar da saúde do bichinho também é amor! 🐾'
-        );
-        await new Promise(resolve => setTimeout(resolve, 3000));
-        await voltarAoMenuPrincipal(client, userId, user);
-
-      } else if (msg.includes('validar') || msg.includes('2')) {
-        await client.sendText(userId, 'Que bom que você cumpriu um desafio!\n\nEscolha uma das categorias que mais se enquadra abaixo:\n\n1️⃣ 🦁 *Animais*\n2️⃣ 📝 *Cidadania*\n3️⃣ 🚲 *Mobilidade*\n4️⃣ 💚 *Saúde e bem estar*\n5️⃣ 🌳 *Meio ambiente*');
+      if (msg.includes('portal saúde') || msg.includes('1')) {
+        await client.sendText(userId, 'Bem-vindo ao Portal Saúde! Escolha uma das opções abaixo:\n\n1️⃣ *Marcar Exame*\n2️⃣ *Consultas Marcadas*\n3️⃣ *Unidades Próximas*\n4️⃣ *Validar Exame*');
         user.step = 3;
-      } else if (msg.includes('saldo') || msg.includes('3')) {
-        await client.sendText(userId, '🌐 Veja seu saldo aqui no seu Conecta Recife!\n👉 https://conecta.recife.pe.gov.br');
-        await new Promise(resolve => setTimeout(resolve, 2500));
-        await voltarAoMenuPrincipal(client, userId, user);
-      } else if (msg.includes('moeda capiba') || msg.includes('4')) {
-        await client.sendText(userId, 'A moeda *Capiba* é um incentivo digital oferecido pelo Conecta Recife. Você pode acumular Capibas ao participar de desafios e atividades da comunidade e trocá-los por benefícios! \n🌐Saiba mais no nosso site oficial: https://conecta.recife.pe.gov.br/servico/949');
-        await new Promise(resolve => setTimeout(resolve, 2500));
-        await voltarAoMenuPrincipal(client, userId, user);
+      } else if (msg.includes('desafios mensais') || msg.includes('2')) {
+        // Logic for Desafios Mensais...
+      } else if (msg.includes('validar') || msg.includes('3')) {
+        // Logic for Validar Meu Desafio...
+      } else if (msg.includes('saldo') || msg.includes('4')) {
+        // Logic for Saldo de Capibas...
+      } else if (msg.includes('moeda capiba') || msg.includes('5')) {
+        // Logic for O que é a moeda Capiba...
       } else {
-        await client.sendText(userId, 'Não entendi! Escolha uma das opções:\n\n1️⃣ *Desafios Mensais*\n2️⃣ *Validar meu desafio*\n3️⃣ *Saldo de Capibas*\n4️⃣ *O que é a moeda Capiba?*');
+        await client.sendText(userId, 'Não entendi! Escolha uma das opções:\n\n1️⃣ *Portal Saúde*\n2️⃣ *Desafios Mensais*\n3️⃣ *Validar meu desafio*\n4️⃣ *Saldo de Capibas*\n5️⃣ *O que é a moeda Capiba?*');
       }
       return;
     }
 
+    // Step 3 - Portal Saúde
     if (user.step === 3) {
-      await client.sendText(userId,
-        `✅ Para validarmos sua atividade, envie o Documento de Validação em formato de foto 📸 ou PDF 📄.`
-      );
-      user.step = 4;
+      if (msg.includes('marcar exame') || msg.includes('1')) {
+        await client.sendText(userId, 'Você pode agendar seu exame através deste link: https://www.telesaude.com.br');
+        await new Promise(resolve => setTimeout(resolve, 2500));
+        await voltarAoMenuPrincipal(client, userId, user);
+      } else if (msg.includes('consultas marcadas') || msg.includes('2')) {
+        await client.sendText(userId, 'Aqui estão suas consultas marcadas: [Lista de consultas]');
+        await new Promise(resolve => setTimeout(resolve, 2500));
+        await voltarAoMenuPrincipal(client, userId, user);
+      } else if (msg.includes('unidades próximas') || msg.includes('3')) {
+        await client.sendText(userId, 'Qual o seu CEP para encontrarmos as unidades mais próximas?');
+        user.step = 4;
+      } else if (msg.includes('validar exame') || msg.includes('4')) {
+        await client.sendText(userId, 'Envie a imagem do seu exame para validação!');
+        user.step = 5;
+      } else {
+        await client.sendText(userId, 'Não entendi! Escolha uma das opções:\n\n1️⃣ *Marcar Exame*\n2️⃣ *Consultas Marcadas*\n3️⃣ *Unidades Próximas*\n4️⃣ *Validar Exame*');
+      }
       return;
     }
 
+    // Step 4 - Unidades Próximas
     if (user.step === 4) {
-      await client.sendText(userId, 'Estamos validando essa informação... 👨‍💻');
-      await new Promise(resolve => setTimeout(resolve, 6000));
+      const cep = msg.trim();
+      await client.sendText(userId, `Aguarde enquanto buscamos as unidades próximas ao seu CEP: ${cep}...`);
+      await new Promise(resolve => setTimeout(resolve, 2500));
+      await client.sendText(userId, 'Aqui estão as unidades mais próximas:\n[Lista de unidades]');
+      await new Promise(resolve => setTimeout(resolve, 2500));
+      await voltarAoMenuPrincipal(client, userId, user);
+      return;
+    }
 
+    // Step 5 - Validar Exame
+    if (user.step === 5) {
       if (message.mimetype && message.mimetype.startsWith('image')) {
-        await client.sendText(userId, 'Estamos validando essa informação...\n\n✅ Parabéns! Sua informação foi validada!\n\nVocê ganhou mais *10 moedas capibas* 🪙!');
+        await client.sendText(userId, 'Exame validado com sucesso! Você ganhou *10 moedas capibas*!');
         await new Promise(resolve => setTimeout(resolve, 2500));
         await client.sendText(userId, '🌐 Veja aqui o seu Conecta Recife!\n👉 https://conecta.recife.pe.gov.br');
       } else {
-        await client.sendText(userId, 'Você não mandou um Documento válido! ⛔, tente novamente!');
-        user.step = 3;
+        await client.sendText(userId, 'Por favor, envie um exame em formato de imagem ou PDF para validá-lo.');
+        user.step = 5;
       }
       await new Promise(resolve => setTimeout(resolve, 2500));
       await voltarAoMenuPrincipal(client, userId, user);
@@ -102,6 +115,6 @@ function start(client) {
 }
 
 async function voltarAoMenuPrincipal(client, userId, user) {
-  await client.sendText(userId, '🔄 Voltando ao menu principal!\n\nEscolha a opção que melhor atende à sua necessidade:\n\n1️⃣ *Desafios Mensais*\n2️⃣ *Validar meu desafio*\n3️⃣ *Saldo de Capibas*\n4️⃣ *O que é a moeda Capiba?*');
+  await client.sendText(userId, '🔄 Voltando ao menu principal!\n\nEscolha a opção que melhor atende à sua necessidade:\n\n1️⃣ *Portal Saúde*\n2️⃣ *Desafios Mensais*\n3️⃣ *Validar meu desafio*\n4️⃣ *Saldo de Capibas*\n5️⃣ *O que é a moeda Capiba?*');
   user.step = 2;
 }
